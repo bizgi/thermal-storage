@@ -18,7 +18,7 @@ ZTGr = {
 		'caseTime': 'd30',
 		'xVal': 'Z',
 		'yVal': 'T',
-		'legend' : ['Gr=3.1E10', 'Gr=3.7E10', 'Gr=4.2E10', 'Gr=4.7E10', 'Gr=5.2E10'],
+		'legend' : ['T1', 'T2', 'T3', 'T4', 'T5'],
 		'non-dimensional' : 'True',
 		'xLabel' : 'Z* [-]',
 		'yLabel': 'T* [-]',
@@ -31,12 +31,12 @@ ZTGr = {
 # plot temperature distibution for different velocity cases
 ZTRe = {
 		'trace': 'caseVel',
-		'caseTemp': '328',
+		'caseTemp': '318',
 		'caseVel': ['0.1', '0.2', '0.4', '0.6', '0.8'],
 		'caseTime': 'd30',
 		'xVal': 'Z',
 		'yVal': 'T',
-		'legend' : ['Re=210', 'Re=335', 'Re=625', 'Re=1000', 'Re=1270'],
+		'legend' : ['v1', 'v2', 'v3', 'v4', 'v5'],
 		'non-dimensional' : 'True',
 		'xLabel' : 'Z* [-]',
 		'yLabel': 'T* [-]',
@@ -49,12 +49,12 @@ ZTRe = {
 # plot temperature distibution for different time cases
 ZTt = {
 		'trace': 'caseTime',
-		'caseTemp': '328',
-		'caseVel': '0.2',
+		'caseTemp': '318',
+		'caseVel': '0.1',
 		'caseTime': ['d5', 'd10','d15', 'd20', 'd25', 'd30'],
 		'xVal': 'Z',
 		'yVal': 'T',
-		'legend' : ['t*=0.167', 't*=0.333', 't*=0.500', 't*=0.667', 't*=0.833', 't*=1.000'],
+		'legend' : ['t1', 't2', 't3', 't4', 't5', 't6'],
 		'non-dimensional' : 'True',
 		'xLabel' : 'Z* [-]',
 		'yLabel': 'T* [-]',
@@ -68,11 +68,11 @@ ZTt = {
 tToutGr = {
 		'trace': 'caseTemp',
 		'caseTemp': ['318', '323', '328', '333', '338'],
-		'caseVel': '0.4', 
+		'caseVel': '0.1', 
 		'caseTime': ['d5', 'd10','d15', 'd20', 'd25', 'd30'],
 		'xVal': 'caseTime',
 		'yVal': 'Tout',
-		'legend' : ['Gr=3.1E10', 'Gr=3.7E10', 'Gr=4.2E10', 'Gr=4.7E10', 'Gr=5.2E10'],
+		'legend' : ['T1', 'T2', 'T3', 'T4', 'T5'],
 		'non-dimensional' : 'True',
 		'xLabel' : 't* [-]',
 		'yLabel': 'Tout* [-]',
@@ -85,12 +85,12 @@ tToutGr = {
 # plot tank outlet temperature for different temperature cases
 tToutRe = {
 		'trace': 'caseVel',
-		'caseTemp': '333',
+		'caseTemp': '318',
 		'caseVel': ['0.1', '0.2', '0.4', '0.6', '0.8'], 
 		'caseTime': ['d5', 'd10','d15', 'd20', 'd25', 'd30'],
 		'xVal': 'caseTime',
 		'yVal': 'Tout',
-		'legend' : ['Re=210', 'Re=335', 'Re=625', 'Re=1000', 'Re=1270'],
+		'legend' : ['v1', 'v2', 'v3', 'v4', 'v5'],
 		'non-dimensional' : 'True',
 		'xLabel' : 't* [-]',
 		'yLabel': 'Tout* [-]',
@@ -124,11 +124,11 @@ path2= './data/engelsiz-volAve.csv'
 # -- <compare plot> -----------------------------------------------------------
 # -- uncomment to plot
 
-#render.compare(plot, ZTGr, path, path2)
-#render.compare(plot, ZTRe, path, path2)
-#render.compare(plot, ZTt, path, path2)
-#render.compare(plot, tToutGr, path, path2)
-#render.compare(plot, tToutRe, path, path2)
+#render.compare(render.plot, ZTGr, path, path2)
+#render.compare(render.plot, ZTRe, path, path2)
+#render.compare(render.plot, ZTt, path, path2)
+#render.compare(render.plot, tToutGr, path, path2)
+#render.compare(render.plot, tToutRe, path, path2)
 
 # -- </compare plot> ----------------------------------------------------------
 

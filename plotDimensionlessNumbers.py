@@ -20,7 +20,7 @@ StVel = {
 	'tankHigh' : 1, # meter
 	'xLabel' : 't* [-]',
 	'yLabel': 'Str [-]',
-	'legend' : ['Re=210', 'Re=335', 'Re=625', 'Re=1000', 'Re=1270'],
+	'legend' : ['v1', 'v2', 'v3', 'v4', 'v5'],
 	'savePlot' : 'False',
 	'saveDpi' : 300,
 	'compareCase1' : 'data-1',
@@ -37,7 +37,7 @@ StTemp = {
 	'tankHigh' : 1, # meter
 	'xLabel' : 't* [-]',
 	'yLabel': 'Str [-]',
-	'legend' : ['Gr=3.1E10', 'Gr=3.7E10', 'Gr=4.2E10', 'Gr=4.7E10', 'Gr=5.2E10'],
+	'legend' : ['T1', 'T2', 'T3', 'T4', 'T5'],
 	'savePlot' : 'True',
 	'saveDpi' : 300,
 	'compareCase1' : 'data-1',
@@ -55,9 +55,14 @@ RiVel = {
 	'caseTemp': '318',
 	'caseVel': ['0.1', '0.2', '0.4', '0.6', '0.8'],
 	'caseTime': ['d5', 'd10','d15', 'd20', 'd25', 'd30'],
+	'tankHigh' : 1, # meter
 	'xLabel' : 't* [-]',
 	'yLabel': 'Ri [-]',
-	'legend' :  ['Re=210', 'Re=335', 'Re=625', 'Re=1000', 'Re=1270']
+	'legend' :  ['v1', 'v2', 'v3', 'v4', 'v5'],
+	'savePlot' : 'False',
+	'saveDpi' : 300,
+	'compareCase1' : 'data-1',
+	'compareCase2' : 'data-2'
 	}
 
 # plot Ri Number for different temperature cases
@@ -66,14 +71,61 @@ RiTemp = {
 	'caseTemp': ['318', '323', '328', '333', '338'],
 	'caseVel': '0.8',
 	'caseTime': [ 'd5', 'd10','d15', 'd20', 'd25', 'd30'],
+	'tankHigh' : 1, # meter
 	'xLabel' : 't* [-]',
 	'yLabel': 'Ri [-]',
-	'legend' :  ['Gr=3.1E10', 'Gr=3.7E10', 'Gr=4.2E10', 'Gr=4.7E10', 'Gr=5.2E10']
+	'legend' :  ['T1', 'T2', 'T3', 'T4', 'T5'],
+	'savePlot' : 'False',
+	'saveDpi' : 300,
+	'compareCase1' : 'data-1',
+	'compareCase2' : 'data-2'
 	}
 
 # --- </ Richardson Number > --------------------------------------------------
 
 
+# --- < Mix Number >  ---------------------------------------------------------
+
+# plot Mix Number for different velocity cases
+MixVel = {
+	'trace': 'caseVel',
+	'caseTemp': '333',
+	'caseVel': ['0.1', '0.2', '0.4', '0.6', '0.8'],
+	'caseTime': ['d5', 'd10','d15', 'd20', 'd25', 'd30'],
+	'tankHigh' : 1, # meter
+	'tankD' : 0.45, # meter
+	'numberOfVolume' : 15,
+	'xLabel' : 't* [-]',
+	'yLabel': 'MIX [-]',
+#	'yLabel' : '$\eta_{Str}$',
+	'legend' :  ['v1', 'v2', 'v3', 'v4', 'v5'],
+	'savePlot' : 'False',
+	'saveDpi' : 300,
+	'compareCase1' : 'data-1',
+	'compareCase2' : 'data-2'
+	}
+
+# plot Mix Number for different temperature cases
+MixTemp = {
+	'name' : 't-MIX',
+	'trace': 'caseTemp',
+	'caseTemp': ['318', '323', '328', '333', '338'],
+	'caseVel': '0.6',
+	'caseTime': ['d5', 'd10','d15', 'd20', 'd25', 'd30'],
+	'tankHigh' : 1, # meter
+	'tankD' : 0.45, # meter
+	'numberOfVolume' : 15,
+	'xLabel' : 't* [-]',
+	'yLabel': 'MIX [-]',
+#	'yLabel' : '$\eta_{Str}$',
+	'legend' : ['T1', 'T2', 'T3', 'T4', 'T5'],
+	'savePlot' : 'False',
+	'saveDpi' : 300,
+	'compareCase1' : 'data-1',
+	'compareCase2' : 'data-2'
+	}
+
+# --- </ Mix Number > --------------------------------------------------
 
 
 #-- <data files> --------------------------------------------------------------
@@ -85,16 +137,17 @@ path2= './data/engelsiz-volAve.csv'
 # -- <plot> -------------------------------------------------------------------
 # -- uncomment to plot
 
-# --- --- --- --- --- Stratification Number
+# -- Stratification Number
 #render.St(path, StVel)
 #render.St(path, StTemp)
 
+# -- Richardson Number
+#render.Ri(path, RiVel)
+#render.Ri(path, RiTemp)
 
-
-#render.plot(path, ZTRe)
-#render.plot(path, ZTt)
-#render.plot(path, tToutGr)
-#render.plot(path, tToutRe)
+# -- Mix Number
+#render.Mix(path, MixVel)
+#render.Mix(path, MixTemp)
 
 #--- </plot> ------------------------------------------------------------------
 
@@ -103,11 +156,16 @@ path2= './data/engelsiz-volAve.csv'
 # -- <compare plot> -----------------------------------------------------------
 # -- uncomment to plot
 
-# --- --- --- --- --- --- --- --- Stratification Number
-#render.compare(St, StVel, path, path2)
-#render.compare(St, StTemp, path, path2)
+# -- Stratification Number
+#render.compare(render.St, StVel, path, path2)
+#render.compare(render.St, StTemp, path, path2)
 
+# -- Richardson Number
+#render.compare(render.Ri, RiVel, path, path2)
+#render.compare(render.Ri, RiTemp, path, path2)
 
-
+# -- Mix Number
+#render.compare(render.Mix, MixVel, path, path2)
+#render.compare(render.Mix, MixTemp, path, path2)
 
 # -- </compare plot> ----------------------------------------------------------

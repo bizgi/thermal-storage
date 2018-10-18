@@ -358,7 +358,7 @@ def Ri(path, sData):
 	
 	# Ri = g * Beta * H * (Ttop - Tbottom) / v^2
 	g = 9.81
-	H = 1
+	H = sData['tankHigh']
 	betas = {
 			'318' : 2.86e-4,
 			'323' : 3.07e-4,
@@ -401,8 +401,11 @@ def Ri(path, sData):
 		plt.legend(loc='upper right')
 		plt.xlabel(xLabel)
 		plt.ylabel(yLabel)
-
+		plt.tight_layout()
 		yData = RiNumber
+		if (sData['savePlot'] == 'True'):
+			plt.savefig('.\savedPlots\\' + trace + '- Ri' +'.png', format='png', dpi=sData['saveDpi'])		
+		
 		return xData, yData, xLabel, yLabel, label	
 
 	if (trace == 'caseTemp'):
@@ -439,8 +442,10 @@ def Ri(path, sData):
 		plt.legend(loc='upper right')
 		plt.xlabel(xLabel)
 		plt.ylabel(yLabel)
-
+		plt.tight_layout()
 		yData = RiNumber
+		if (sData['savePlot'] == 'True'):
+			plt.savefig('.\savedPlots\\' + trace + '- Ri' +'.png', format='png', dpi=sData['saveDpi'])
 		return xData, yData, xLabel, yLabel, label
 #------------------------------------------------------------------------------
 
@@ -619,8 +624,9 @@ def Mix(path, sData):
 	# Number of volumes : 15
 	# each volume
 	pi = np.pi
-	H = 1 # m
-	D = 0.45 # m
+	H = sData['tankHigh'] # m
+	D = sData['tankD'] # m
+	nVol = sData['numberOfVolume']
 	vol_i = (pi * D**2 / 4 ) * (1/15)
 	vol = (pi * D**2 / 4 ) * H
 #	print (vol_i) 
@@ -637,12 +643,12 @@ def Mix(path, sData):
 				
 				#-- E_act - M_act --------------------------------------------
 				TvolAve = []
-				yi = 1/30
+				yi = H/(2*nVol)
 				yii = [0.016666667, 0.066666667, 0.133333333, 0.2, 0.266666667, 0.333333333, 0.4, 0.466666667, 0.533333333, 0.6, 0.666666667, 0.733333333, 0.8, 0.866666667, 0.9, 0.983333333 ]
 				E_acti = []
 				M_acti = []
 				for k in range(len(T)-1):
-					print('kk-------------------', k)
+#					print('kk-------------------', k)
 					if ( k == 0 ):
 						vol_i2 = vol_i / 2
 						Tv = (T[k+1]*vol_i + T[k]*vol_i2) / (vol_i + vol_i2)
@@ -668,7 +674,7 @@ def Mix(path, sData):
 					E_acti.append(vol_i * rho(Tv) * cp(Tv) * Tv)
 					M_acti.append(vol_i * rho(Tv) * cp(Tv) * Tv * yi)
 
-					yi = yi + 1/15
+					yi = yi + H/nVol
 #					print ('yi ------------------------------ ', yi)
 				
 				E_act = sum(E_acti)
@@ -722,8 +728,10 @@ def Mix(path, sData):
 		plt.legend(loc='upper left')
 		plt.xlabel(xLabel)
 		plt.ylabel(yLabel)
-
+		plt.tight_layout()
 		yData = MixNumber
+		if (sData['savePlot'] == 'True'):
+			plt.savefig('.\savedPlots\\' + trace + '- Mix' +'.png', format='png', dpi=sData['saveDpi'])
 		return xData, yData, xLabel, yLabel, label
 				
 	if (trace == 'caseTemp'):
@@ -738,7 +746,7 @@ def Mix(path, sData):
 				
 				#-- E_act - M_act --------------------------------------------
 				TvolAve = []
-				yi = 1/30
+				yi = H/(2*nVol)
 				yii = [0.016666667, 0.066666667, 0.133333333, 0.2, 0.266666667, 0.333333333, 0.4, 0.466666667, 0.533333333, 0.6, 0.666666667, 0.733333333, 0.8, 0.866666667, 0.9, 0.983333333 ]
 				E_act = 0
 				M_act = 0
@@ -759,7 +767,7 @@ def Mix(path, sData):
 					E_act = E_act + vol_i * rho(Tv) * cp(Tv) * Tv
 					M_act = M_act + vol_i * rho(Tv) * cp(Tv) * Tv * yi
 
-					yi = yi + 1/15
+					yi = yi + H/nVol
 #					print (yi)
 				
 #				print(TvolAve)
@@ -810,8 +818,11 @@ def Mix(path, sData):
 		plt.legend(loc='upper left')
 		plt.xlabel(xLabel)
 		plt.ylabel(yLabel)	
+		plt.tight_layout()
 
 		yData = MixNumber
+		if (sData['savePlot'] == 'True'):
+			plt.savefig('.\savedPlots\\' + trace + '- Mix' +'.png', format='png', dpi=sData['saveDpi'])
 		return xData, yData, xLabel, yLabel, label
 #------------------------------------------------------------------------------
 
